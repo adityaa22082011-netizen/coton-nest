@@ -5,657 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cotton Nest — Lucky Spin & Win Voucher</title>
   <meta name="description" content="Spin the lucky wheel to win an exclusive Cotton Nest store voucher from ₹100 to ₹150 OFF!" />
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Canvas Confetti CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
-
+  <link rel="preconnect" href="https://googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://tailwindcss.com"></script>
+  <script src="https://jsdelivr.net"></script>
   <style>
-    body {
-      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-    }
-    .font-outfit {
-      font-family: 'Outfit', sans-serif;
-    }
-    .font-serif-brand {
-      font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
-    }
-    @keyframes pulse-subtle {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.02); }
-    }
-    .animate-pulse-subtle {
-      animation: pulse-subtle 2.5s infinite ease-in-out;
-    }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-outfit { font-family: 'Outfit', sans-serif; }
+    .font-serif-brand { font-family: 'Playfair Display', Georgia, serif; }
   </style>
-<script src="/_aistudio-iframe.js?v=2c34bde1"></script></head>
+</head>
 <body class="min-h-screen bg-slate-50 text-slate-900 flex flex-col justify-between selection:bg-sky-100">
-
-  <!-- ================= TOP NAVIGATION ================= -->
   <header class="border-b border-slate-200/80 bg-white/90 backdrop-blur-md sticky top-0 z-40 px-4 py-3">
     <div class="max-w-5xl mx-auto flex items-center justify-between">
-      <!-- Brand & Name -->
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-600 to-sky-400 text-white flex items-center justify-center shadow-sm font-black text-sm tracking-wider">
-          CN
-        </div>
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-600 to-sky-400 text-white flex items-center justify-center shadow-sm font-black text-sm">CN</div>
         <div>
           <div class="flex items-center gap-2">
-            <h1 class="text-base font-extrabold tracking-tight text-slate-900 font-serif-brand">
-              Cotton Nest
-            </h1>
-            <span class="hidden sm:inline-block text-[10px] uppercase font-bold tracking-wider bg-sky-100 text-sky-800 px-2 py-0.5 rounded-full border border-sky-200">
-              ₹100–₹150 OFF
-            </span>
+            <h1 class="text-base font-extrabold text-slate-900 font-serif-brand">Cotton Nest</h1>
+            <span class="hidden sm:inline-block text-[10px] uppercase font-bold bg-sky-100 text-sky-800 px-2 py-0.5 rounded-full border border-sky-200">₹100–₹150 OFF</span>
           </div>
-          <p class="text-[11px] text-slate-500 hidden sm:block">
-            Feel The Softness • Lucky Prize Wheel
-          </p>
+          <p class="text-[11px] text-slate-500 hidden sm:block">Feel The Softness • Lucky Prize Wheel</p>
         </div>
       </div>
-
-      <!-- Action Buttons -->
       <div class="flex items-center gap-2">
-        <button id="btnSound" class="p-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors border border-slate-200/80" title="Toggle Sound">
-          <svg id="iconSoundOn" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M12 6L7 10H3v4h4l5 4V6z"/></svg>
-          <svg id="iconSoundOff" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/></svg>
-        </button>
-
-        <button id="btnPrizeTable" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-100 border border-slate-200/80 transition-all shadow-xs">
-          <svg class="w-3.5 h-3.5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
-          <span class="hidden sm:inline">Prizes</span>
-        </button>
-
-        <button id="btnHistory" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-100 border border-slate-200/80 transition-all shadow-xs">
-          <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          <span class="hidden sm:inline">History</span>
-        </button>
+        <button id="btnPrizeTable" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700 bg-white border border-slate-200/80 hover:bg-slate-100 transition-all"><span>Prizes</span></button>
+        <button id="btnHistory" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700 bg-white border border-slate-200/80 hover:bg-slate-100 transition-all"><span>History</span></button>
       </div>
     </div>
   </header>
 
-  <!-- ================= MAIN CONTENT ================= -->
   <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-6 sm:py-8 flex flex-col items-center">
-    
-    <!-- Hero Header -->
     <div class="text-center max-w-lg mb-6">
-      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 border border-sky-200/80 text-sky-800 text-xs font-bold mb-2">
-        <svg class="w-3.5 h-3.5 text-sky-600" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-        <span>Cotton Nest Customer Reward</span>
-      </div>
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-        Spin to Win Your Store Voucher
-      </h2>
-      <p class="text-xs sm:text-sm text-slate-600 mt-1">
-        Every spin is a guaranteed winner of ₹100, ₹105, up to ₹150 OFF. Valid on all bedding & apparel!
-      </p>
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 border border-sky-200/80 text-sky-800 text-xs font-bold mb-2"><span>Cotton Nest Customer Reward</span></div>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Spin to Win Your Store Voucher</h2>
+      <p class="text-xs sm:text-sm text-slate-600 mt-1">Every spin is a guaranteed winner of ₹100 to ₹150 OFF!</p>
     </div>
 
-    <!-- ================= WHEEL CONTAINER ================= -->
-    <div class="relative flex flex-col items-center justify-center w-full max-w-[420px] aspect-square">
-      <!-- Pointer Indicator at Top -->
-      <div class="absolute -top-3 z-30 flex flex-col items-center pointer-events-none transition-transform duration-75" id="wheelPointer">
-        <div class="w-7 h-9 drop-shadow-md">
-          <svg viewBox="0 0 28 36" class="w-full h-full">
-            <polygon points="14,36 0,6 28,6" fill="#ef4444" stroke="#ffffff" stroke-width="2.5" stroke-linejoin="round" />
-            <circle cx="14" cy="9" r="4.5" fill="#ffffff" />
-            <circle cx="14" cy="9" r="2.5" fill="#b91c1c" />
-          </svg>
-        </div>
+    <div class="relative flex flex-col items-center justify-center w-full max-w-[360px] aspect-square my-4">
+      <div class="absolute -top-3 z-30 pointer-events-none" id="wheelPointer">
+        <svg width="28" height="36" viewBox="0 0 28 36"><polygon points="14,36 0,6 28,6" fill="#ef4444" stroke="#ffffff" stroke-width="2.5"/><circle cx="14" cy="9" r="2.5" fill="#b91c1c" /></svg>
       </div>
-
-      <!-- Canvas Wheel -->
-      <div class="relative w-full h-full p-2">
-        <canvas id="wheelCanvas" width="800" height="800" class="w-full h-full drop-shadow-xl"></canvas>
-      </div>
-
-      <!-- Center Spin Button -->
-      <div class="absolute inset-0 m-auto w-24 h-24 sm:w-28 sm:h-28 z-20 flex items-center justify-center">
-        <button id="btnSpin" class="group relative w-full h-full rounded-full bg-gradient-to-tr from-sky-700 via-sky-600 to-sky-400 p-1 shadow-2xl hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed">
-          <div class="w-full h-full rounded-full bg-white flex flex-col items-center justify-center text-center p-2 shadow-inner border border-sky-100">
-            <span id="spinButtonText" class="text-sm sm:text-base font-black tracking-wider text-sky-900 uppercase">
-              SPIN
-            </span>
-            <span id="spinButtonSub" class="text-[9px] font-bold text-sky-600 uppercase tracking-widest">
-              100% Win
-            </span>
+      <canvas id="wheelCanvas" width="800" height="800" class="w-full h-full drop-shadow-xl transition-transform duration-[4000ms] ease-out"></canvas>
+      <div class="absolute inset-0 m-auto w-24 h-24 z-20 flex items-center justify-center">
+        <button id="btnSpin" class="w-full h-full rounded-full bg-gradient-to-tr from-sky-700 to-sky-400 p-1 shadow-2xl hover:scale-105 active:scale-95 transition-all">
+          <div class="w-full h-full rounded-full bg-white flex flex-col items-center justify-center border border-sky-100 shadow-inner">
+            <span class="text-sm font-black text-sky-900">SPIN</span>
           </div>
         </button>
       </div>
     </div>
 
-    <!-- ================= RESULT / VOUCHER SECTION ================= -->
     <div id="voucherSection" class="w-full max-w-xl mt-6 hidden">
-      <div class="bg-white rounded-2xl p-5 border border-slate-200/90 shadow-sm">
-        
-        <!-- Header badge -->
-        <div class="flex items-center justify-between mb-4">
-          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 border border-sky-200 text-sky-900 text-xs font-semibold">
-            <svg class="w-3.5 h-3.5 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-            <span>Cotton Nest Official Voucher</span>
-          </div>
-          <div class="flex items-center gap-1 text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-            <svg class="w-3 h-3 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-            <span>Unlocked</span>
+      <div class="bg-gradient-to-br from-white to-sky-50/30 rounded-2xl p-6 border border-sky-100 shadow-xl">
+        <div class="border-2 border-dashed border-sky-200/80 rounded-xl p-5 bg-white text-center">
+          <h3 class="text-3xl font-black text-sky-900" id="voucherAmount">₹150 OFF</h3>
+          <div class="mt-4 flex flex-col sm:flex-row items-center gap-3">
+            <div class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 font-mono text-sm font-bold tracking-wider text-slate-700" id="promoCode">LUCKY150-XXXX</div>
+            <button id="btnCopy" class="w-full sm:w-auto bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs px-4 py-2.5 rounded-lg shrink-0"><span>Copy Code</span></button>
           </div>
         </div>
-
-        <!-- THE EXACT SWALLOWTAIL BANNER WITH COTTON NEST NAME -->
-        <div class="relative w-full drop-shadow-md select-none">
-          <svg viewBox="0 0 540 160" class="w-full h-auto overflow-visible" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="bannerBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#e1f2fe" />
-                <stop offset="50%" stop-color="#e8f5ff" />
-                <stop offset="100%" stop-color="#d9effe" />
-              </linearGradient>
-
-              <!-- Subtle Abstract Textile Pattern -->
-              <pattern id="textilePattern" width="48" height="48" patternUnits="userSpaceOnUse">
-                <path d="M4 12 Q 12 4, 20 12 T 36 12 M12 28 Q 20 20, 28 28 T 44 28 M0 40 Q 8 32, 16 40 T 32 40" fill="none" stroke="#38bdf8" stroke-width="0.8" opacity="0.22" stroke-linecap="round"/>
-                <circle cx="24" cy="14" r="1.2" fill="#0284c7" opacity="0.16" />
-                <circle cx="8" cy="34" r="1" fill="#0284c7" opacity="0.16" />
-                <circle cx="42" cy="40" r="1.2" fill="#0284c7" opacity="0.16" />
-              </pattern>
-            </defs>
-
-            <!-- Swallowtail Ribbon Banner Shape -->
-            <path d="M 0 0 L 540 0 L 508 80 L 540 160 L 0 160 L 32 80 Z" fill="url(#bannerBgGrad)" stroke="#7dd3fc" stroke-width="1.2" stroke-linejoin="miter" />
-            <path d="M 0 0 L 540 0 L 508 80 L 540 160 L 0 160 L 32 80 Z" fill="url(#textilePattern)" opacity="0.85" />
-            <path d="M 6 4 L 532 4 L 502 80 L 532 156 L 6 156 L 36 80 Z" fill="none" stroke="#38bdf8" stroke-width="0.75" stroke-dasharray="4 2" opacity="0.45" />
-
-            <!-- BRAND NAME: COTTON NEST inside the Light Box -->
-            <g transform="translate(114, 80)">
-              <rect x="-72" y="-46" width="144" height="92" rx="10" fill="#ffffff" fill-opacity="0.92" stroke="#bae6fd" stroke-width="1.2" />
-              <rect x="-66" y="-40" width="132" height="80" rx="6" fill="none" stroke="#e0f2fe" stroke-width="0.75" stroke-dasharray="3 2" />
-
-              <!-- Star Flourish -->
-              <g transform="translate(0, -22)" opacity="0.75">
-                <path d="M 0 -6 L 1.8 -1.8 L 6 0 L 1.8 1.8 L 0 6 L -1.8 1.8 L -6 0 L -1.8 -1.8 Z" fill="#0284c7" />
-                <circle cx="-16" cy="0" r="1" fill="#38bdf8" />
-                <circle cx="16" cy="0" r="1" fill="#38bdf8" />
-              </g>
-
-              <text x="0" y="2" text-anchor="middle" font-family="'Playfair Display', 'Cormorant Garamond', serif" font-size="16" font-weight="700" fill="#0f172a" letter-spacing="0.08em">
-                COTTON NEST
-              </text>
-
-              <!-- Slogan: FEEL THE SOFTNESS -->
-              <g transform="translate(0, 20)">
-                <line x1="-50" y1="-3" x2="-36" y2="-3" stroke="#94a3b8" stroke-width="0.75" />
-                <text x="0" y="0" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="6.8" font-weight="700" fill="#475569" letter-spacing="0.14em">
-                  FEEL THE SOFTNESS
-                </text>
-                <line x1="36" y1="-3" x2="50" y2="-3" stroke="#94a3b8" stroke-width="0.75" />
-              </g>
-            </g>
-
-            <!-- Dashed Divider -->
-            <line x1="200" y1="28" x2="200" y2="132" stroke="#7dd3fc" stroke-width="1" stroke-dasharray="3 3" opacity="0.75" />
-
-            <!-- RIGHT SIDE: Price & Voucher Details -->
-            <g transform="translate(216, 0)">
-              <text x="0" y="38" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" font-weight="800" fill="#0369a1" letter-spacing="0.18em">
-                EXCLUSIVE STORE VOUCHER
-              </text>
-
-              <g transform="translate(0, 74)">
-                <text x="0" y="-2" font-family="'Outfit', sans-serif" font-size="24" font-weight="800" fill="#0f172a">₹</text>
-                <text id="bannerAmountText" x="18" y="0" font-family="'Outfit', sans-serif" font-size="38" font-weight="900" fill="#0f172a" letter-spacing="-1">150</text>
-                <text x="100" y="-4" font-family="'Outfit', sans-serif" font-size="20" font-weight="900" fill="#0284c7" letter-spacing="0.5">OFF</text>
-              </g>
-
-              <text x="0" y="96" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" font-weight="600" fill="#475569">
-                Applicable on all Cotton Nest bedding & apparel
-              </text>
-
-              <!-- Promo Code Box -->
-              <g transform="translate(0, 110)">
-                <rect x="0" y="0" width="165" height="28" rx="6" fill="#ffffff" stroke="#7dd3fc" stroke-width="1" />
-                <text id="bannerCodeText" x="10" y="18" font-family="monospace" font-size="12" font-weight="800" fill="#0284c7" letter-spacing="1">LUCKY150-XXXX</text>
-              </g>
-            </g>
-          </svg>
-        </div>
-
-        <!-- Copy Code Bar -->
-        <div class="mt-4 flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-100">
-          <button id="btnCopyCode" class="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-xs bg-sky-600 hover:bg-sky-700 text-white cursor-pointer active:scale-95">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-            <span id="copyButtonText">Copy Promo Code</span>
-          </button>
-
-          <div class="flex items-center gap-1.5 text-xs text-slate-500">
-            <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-            <span>Device Locked (1 spin per customer)</span>
-          </div>
-        </div>
-
-        <!-- Demo Reset Link -->
-        <div class="text-center mt-3">
-          <button id="btnResetSpin" class="text-[11px] text-slate-400 hover:text-slate-600 underline cursor-pointer">
-            Reset for new spin (Testing demo)
-          </button>
-        </div>
-
+        <div class="text-center mt-3"><button id="btnReset" class="text-[11px] font-semibold text-sky-600 hover:underline">Reset for testing</button></div>
       </div>
     </div>
-
   </main>
 
-  <!-- ================= FOOTER ================= -->
-  <footer class="border-t border-slate-200/80 bg-white/70 text-center py-4 px-4 text-xs text-slate-500">
-    <p>© 2026 Cotton Nest • Premium Bedding & Apparel • 100% Natural Cotton</p>
-  </footer>
-
-  <!-- ================= PRIZE ODDS MODAL ================= -->
-  <div id="modalPrizeTable" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
-    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200">
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="text-lg font-bold text-slate-900">Cotton Nest Prize Wheel Odds</h3>
-        <button id="btnClosePrizeTable" class="text-slate-400 hover:text-slate-600 text-lg font-bold">✕</button>
-      </div>
-      <p class="text-xs text-slate-600 mb-4">
-        Every spin is guaranteed to land between ₹100 and ₹150 (in multiples of ₹5).
-      </p>
-      <div class="space-y-1.5 max-h-60 overflow-y-auto pr-1 text-xs">
-        <div class="flex justify-between p-2 rounded-lg bg-slate-50 font-bold text-slate-700">
-          <span>₹150 OFF (Grand Prize)</span>
-          <span class="text-emerald-600">Guaranteed Pool</span>
-        </div>
-        <div class="flex justify-between p-2 rounded-lg bg-white border border-slate-100 text-slate-600">
-          <span>₹145 OFF</span>
-          <span>Guaranteed Pool</span>
-        </div>
-        <div class="flex justify-between p-2 rounded-lg bg-white border border-slate-100 text-slate-600">
-          <span>₹140 OFF</span>
-          <span>Guaranteed Pool</span>
-        </div>
-        <div class="flex justify-between p-2 rounded-lg bg-white border border-slate-100 text-slate-600">
-          <span>₹135 OFF</span>
-          <span>Guaranteed Pool</span>
-        </div>
-        <div class="flex justify-between p-2 rounded-lg bg-white border border-slate-100 text-slate-600">
-          <span>₹130 OFF</span>
-          <span>Guaranteed Pool</span>
-        </div>
-        <div class="flex justify-between p-2 rounded-lg bg-white border border-slate-100 text-slate-600">
-          <span>₹125 OFF</span>
-          <span>Guaranteed Pool</span>
-        </div>
-        <div class="flex justify-between p-2 rounded-lg bg-white border border-slate-100 text-slate-600">
-          <span>₹120 OFF</span>
-          <span>Guaranteed Pool</span>
-        </div>
-        <div class="flex justify-between p-2 rounded-lg bg-white border border-slate-100 text-slate-600">
-          <span>₹115 OFF</span>
-          <span>Guaranteed Pool</span>
-        </div>
-        <div class="flex justify-between p-2 rounded-lg bg-white border border-slate-100 text-slate-600">
-          <span>₹110 OFF</span>
-          <span>Guaranteed Pool</span>
-        </div>
-        <div class="flex justify-between p-2 rounded-lg bg-white border border-slate-100 text-slate-600">
-          <span>₹105 OFF</span>
-          <span>Guaranteed Pool</span>
-        </div>
-        <div class="flex justify-between p-2 rounded-lg bg-white border border-slate-100 text-slate-600">
-          <span>₹100 OFF</span>
-          <span>Guaranteed Pool</span>
-        </div>
-      </div>
-      <button id="btnOkPrizeTable" class="w-full mt-5 py-2.5 bg-slate-900 text-white text-xs font-bold rounded-xl hover:bg-slate-800">
-        Got it
-      </button>
-    </div>
+  <div id="modalPrizes" class="fixed inset-0 z-50 bg-slate-900/40 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl w-full max-w-md p-5"><h3 class="font-bold mb-3">Prize Pools</h3><div id="prizeList" class="space-y-2 text-xs"></div><button class="closeModal mt-4 px-4 py-1.5 bg-slate-800 text-white text-xs rounded-lg">Close</button></div>
   </div>
 
-  <!-- ================= HISTORY MODAL ================= -->
-  <div id="modalHistory" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
-    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200">
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="text-lg font-bold text-slate-900">Voucher Claim History</h3>
-        <button id="btnCloseHistory" class="text-slate-400 hover:text-slate-600 text-lg font-bold">✕</button>
-      </div>
-      <div id="historyList" class="space-y-2 max-h-60 overflow-y-auto pr-1 text-xs">
-        <p class="text-slate-400 text-center py-6">No previous coupons claimed yet.</p>
-      </div>
-      <button id="btnOkHistory" class="w-full mt-5 py-2.5 bg-slate-900 text-white text-xs font-bold rounded-xl hover:bg-slate-800">
-        Close
-      </button>
-    </div>
+  <div id="modalHistory" class="fixed inset-0 z-50 bg-slate-900/40 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl w-full max-w-md p-5"><h3 class="font-bold mb-3">Claim History</h3><div id="historyContent" class="text-xs"></div><button class="closeModal mt-4 px-4 py-1.5 bg-slate-800 text-white text-xs rounded-lg">Close</button></div>
   </div>
 
-  <!-- ================= JAVASCRIPT GAME ENGINE ================= -->
-  <script>
-    // --- Config & State ---
-    const DISCOUNTS = [100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150];
-    const SEGMENTS_COUNT = DISCOUNTS.length;
-    const STORAGE_KEY = 'jackpot_won_coupon_v1';
-    const HISTORY_KEY = 'jackpot_coupon_history_v1';
-
-    let soundEnabled = true;
-    let isSpinning = false;
-    let currentRotation = 0; // in radians
-    let activeCoupon = null;
-
-    // --- Audio Synthesis via Web Audio API ---
-    let audioCtx = null;
-    function getAudioCtx() {
-      if (!audioCtx) {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        if (AudioContext) audioCtx = new AudioContext();
-      }
-      if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-      return audioCtx;
-    }
-
-    function playTick() {
-      if (!soundEnabled) return;
-      try {
-        const ctx = getAudioCtx();
-        if (!ctx) return;
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(420, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.035);
-        gain.gain.setValueAtTime(0.06, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.035);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.04);
-      } catch (e) {}
-    }
-
-    function playFanfare() {
-      if (!soundEnabled) return;
-      try {
-        const ctx = getAudioCtx();
-        if (!ctx) return;
-        [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
-          const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.1);
-          gain.gain.setValueAtTime(0.08, ctx.currentTime + i * 0.1);
-          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.1 + 0.4);
-          osc.connect(gain);
-          gain.connect(ctx.destination);
-          osc.start(ctx.currentTime + i * 0.1);
-          osc.stop(ctx.currentTime + i * 0.1 + 0.45);
-        });
-      } catch (e) {}
-    }
-
-    // --- Canvas Wheel Rendering ---
-    const canvas = document.getElementById('wheelCanvas');
-    const ctx = canvas.getContext('2d');
-    const center = 400;
-    const radius = 370;
-
-    // Segment color palettes
-    const COLORS = [
-      '#0284c7', '#0369a1', '#0ea5e9', '#38bdf8',
-      '#2563eb', '#1d4ed8', '#3b82f6', '#60a5fa',
-      '#0891b2', '#06b6d4', '#0284c7'
-    ];
-
-    function drawWheel(angle) {
-      ctx.clearRect(0, 0, 800, 800);
-      const arc = (Math.PI * 2) / SEGMENTS_COUNT;
-
-      ctx.save();
-      ctx.translate(center, center);
-      ctx.rotate(angle);
-
-      // Draw Segments
-      for (let i = 0; i < SEGMENTS_COUNT; i++) {
-        const segAngle = i * arc;
-        ctx.beginPath();
-        ctx.fillStyle = COLORS[i % COLORS.length];
-        ctx.moveTo(0, 0);
-        ctx.arc(0, 0, radius, segAngle, segAngle + arc);
-        ctx.lineTo(0, 0);
-        ctx.fill();
-
-        // Subtle divider lines
-        ctx.lineWidth = 2.5;
-        ctx.strokeStyle = '#ffffff';
-        ctx.stroke();
-
-        // Text rendering
-        ctx.save();
-        ctx.fillStyle = '#ffffff';
-        ctx.font = 'bold 36px Outfit, sans-serif';
-        ctx.shadowColor = 'rgba(0,0,0,0.3)';
-        ctx.shadowBlur = 4;
-        ctx.shadowOffsetY = 2;
-
-        ctx.translate(
-          Math.cos(segAngle + arc / 2) * (radius * 0.72),
-          Math.sin(segAngle + arc / 2) * (radius * 0.72)
-        );
-        ctx.rotate(segAngle + arc / 2 + Math.PI / 2);
-        const text = `₹${DISCOUNTS[i]}`;
-        ctx.fillText(text, -ctx.measureText(text).width / 2, 10);
-        ctx.restore();
-      }
-
-      // Outer gold rim
-      ctx.beginPath();
-      ctx.arc(0, 0, radius, 0, Math.PI * 2);
-      ctx.lineWidth = 14;
-      ctx.strokeStyle = '#f59e0b';
-      ctx.stroke();
-
-      // Outer perimeter pegs
-      for (let p = 0; p < SEGMENTS_COUNT * 2; p++) {
-        const pegAngle = (p * Math.PI) / SEGMENTS_COUNT;
-        const px = Math.cos(pegAngle) * (radius - 1);
-        const py = Math.sin(pegAngle) * (radius - 1);
-        ctx.beginPath();
-        ctx.arc(px, py, 4.5, 0, Math.PI * 2);
-        ctx.fillStyle = '#ffffff';
-        ctx.shadowColor = 'rgba(0,0,0,0.4)';
-        ctx.shadowBlur = 3;
-        ctx.fill();
-      }
-
-      ctx.restore();
-    }
-
-    // --- Spin Logic ---
-    function spinToPrize(targetAmount) {
-      if (isSpinning) return;
-      isSpinning = true;
-
-      const targetIndex = DISCOUNTS.indexOf(targetAmount);
-      const arc = (Math.PI * 2) / SEGMENTS_COUNT;
-
-      // Pointer is at the top (-PI/2)
-      // To have segment `targetIndex` land at top, target center of segment should align with -PI/2
-      const fullTurns = 6 + Math.floor(Math.random() * 2); // 6 or 7 full revolutions
-      const targetAngleAtTop = -Math.PI / 2;
-      const segmentCenterAngle = targetIndex * arc + arc / 2;
-
-      // Calculate final rotation
-      let finalRotation = fullTurns * Math.PI * 2 + (targetAngleAtTop - segmentCenterAngle);
-      while (finalRotation < currentRotation + 4 * Math.PI * 2) {
-        finalRotation += Math.PI * 2;
-      }
-
-      const startRotation = currentRotation;
-      const duration = 5000; // 5 seconds
-      const startTime = performance.now();
-
-      let lastPegIndex = -1;
-
-      function animate(time) {
-        const elapsed = time - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-
-        // Quintic Deceleration easing for realistic wheel friction
-        const easeOut = 1 - Math.pow(1 - progress, 4.5);
-        currentRotation = startRotation + (finalRotation - startRotation) * easeOut;
-
-        drawWheel(currentRotation);
-
-        // Calculate passed pegs for tick sound
-        const currentPeg = Math.floor((currentRotation / arc) * 2);
-        if (currentPeg !== lastPegIndex) {
-          playTick();
-          lastPegIndex = currentPeg;
-
-          // Pointer tick animation
-          const pointer = document.getElementById('wheelPointer');
-          pointer.style.transform = 'rotate(-14deg)';
-          setTimeout(() => { pointer.style.transform = 'rotate(0deg)'; }, 40);
-        }
-
-        if (progress < 1) {
-          requestAnimationFrame(animate);
-        } else {
-          isSpinning = false;
-          onSpinComplete(targetAmount);
-        }
-      }
-
-      requestAnimationFrame(animate);
-    }
-
-    function onSpinComplete(amount) {
-      playFanfare();
-      confetti({
-        particleCount: amount >= 140 ? 110 : 80,
-        spread: 85,
-        origin: { y: 0.65 },
-        colors: ['#38bdf8', '#0284c7', '#f59e0b', '#10b981', '#ffffff']
-      });
-
-      const randomChars = Math.random().toString(36).substring(2, 6).toUpperCase();
-      activeCoupon = {
-        amount: amount,
-        code: `LUCKY${amount}-${randomChars}`,
-        date: new Date().toLocaleDateString()
-      };
-
-      // Save to localStorage
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(activeCoupon));
-
-      // Save to history
-      let history = [];
-      try { history = JSON.parse(localStorage.getItem(HISTORY_KEY)) || []; } catch(e) {}
-      history.unshift(activeCoupon);
-      localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
-
-      showVoucher(activeCoupon);
-      lockSpinButton();
-    }
-
-    function showVoucher(coupon) {
-      document.getElementById('bannerAmountText').textContent = coupon.amount;
-      document.getElementById('bannerCodeText').textContent = coupon.code;
-      document.getElementById('voucherSection').classList.remove('hidden');
-    }
-
-    function lockSpinButton() {
-      const btn = document.getElementById('btnSpin');
-      btn.disabled = true;
-      document.getElementById('spinButtonText').textContent = 'LOCKED';
-      document.getElementById('spinButtonSub').textContent = 'CLAIMED';
-    }
-
-    // --- Init on Page Load ---
-    window.addEventListener('DOMContentLoaded', () => {
-      drawWheel(0);
-
-      // Check if user already spun
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        try {
-          activeCoupon = JSON.parse(saved);
-          showVoucher(activeCoupon);
-          lockSpinButton();
-          // Draw wheel aligned to that prize
-          const targetIndex = DISCOUNTS.indexOf(activeCoupon.amount);
-          const arc = (Math.PI * 2) / SEGMENTS_COUNT;
-          currentRotation = -Math.PI / 2 - (targetIndex * arc + arc / 2);
-          drawWheel(currentRotation);
-        } catch(e) {}
-      }
-
-      // Spin button click
-      document.getElementById('btnSpin').addEventListener('click', () => {
-        if (isSpinning || activeCoupon) return;
-        // Pick random discount
-        const prize = DISCOUNTS[Math.floor(Math.random() * DISCOUNTS.length)];
-        spinToPrize(prize);
-      });
-
-      // Sound toggle
-      document.getElementById('btnSound').addEventListener('click', () => {
-        soundEnabled = !soundEnabled;
-        document.getElementById('iconSoundOn').classList.toggle('hidden', !soundEnabled);
-        document.getElementById('iconSoundOff').classList.toggle('hidden', soundEnabled);
-      });
-
-      // Copy Promo Code
-      document.getElementById('btnCopyCode').addEventListener('click', () => {
-        if (!activeCoupon) return;
-        navigator.clipboard.writeText(activeCoupon.code);
-        const btnText = document.getElementById('copyButtonText');
-        btnText.textContent = 'Copied to Clipboard!';
-        setTimeout(() => { btnText.textContent = 'Copy Promo Code'; }, 2200);
-      });
-
-      // Reset for demo
-      document.getElementById('btnResetSpin').addEventListener('click', () => {
-        localStorage.removeItem(STORAGE_KEY);
-        activeCoupon = null;
-        document.getElementById('voucherSection').classList.add('hidden');
-        const btn = document.getElementById('btnSpin');
-        btn.disabled = false;
-        document.getElementById('spinButtonText').textContent = 'SPIN';
-        document.getElementById('spinButtonSub').textContent = '100% Win';
-      });
-
-      // Modals
-      const modalPrize = document.getElementById('modalPrizeTable');
-      document.getElementById('btnPrizeTable').addEventListener('click', () => modalPrize.classList.remove('hidden'));
-      document.getElementById('btnClosePrizeTable').addEventListener('click', () => modalPrize.classList.add('hidden'));
-      document.getElementById('btnOkPrizeTable').addEventListener('click', () => modalPrize.classList.add('hidden'));
-
-      const modalHistory = document.getElementById('modalHistory');
-      document.getElementById('btnHistory').addEventListener('click', () => {
-        let history = [];
-        try { history = JSON.parse(localStorage.getItem(HISTORY_KEY)) || []; } catch(e) {}
-        const list = document.getElementById('historyList');
-        if (history.length === 0) {
-          list.innerHTML = '<p class="text-slate-400 text-center py-6">No previous coupons claimed yet.</p>';
-        } else {
-          list.innerHTML = history.map(h => `
-            <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200/60">
-              <div>
-                <span class="font-extrabold text-slate-900 font-outfit">₹${h.amount} OFF</span>
-                <span class="text-[10px] text-slate-400 block">${h.date || 'Recent'}</span>
-              </div>
-              <span class="font-mono text-xs font-bold text-sky-700 bg-white px-2 py-1 rounded border border-slate-200">${h.code}</span>
-            </div>
-          `).join('');
-        }
-        modalHistory.classList.remove('hidden');
-      });
-      document.getElementById('btnCloseHistory').addEventListener('click', () => modalHistory.classList.add('hidden'));
-      document.getElementById('btnOkHistory').addEventListener('click', () => modalHistory.classList.add('hidden'));
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
