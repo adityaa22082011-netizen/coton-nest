@@ -5,11 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cotton Nest — Lucky Spin & Win Voucher</title>
   <meta name="description" content="Spin the lucky wheel to win an exclusive Cotton Nest store voucher from ₹100 to ₹150 OFF!" />
+  
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://googleapis.com">
   <link rel="preconnect" href="https://gstatic.com" crossorigin>
   <link href="https://googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://tailwindcss.com"></script>
+  
+  <!-- Fixed Tailwind CSS Play CDN Link -->
+  <script src="https://unpkg.com"></script>
+  <!-- Canvas Confetti CDN -->
   <script src="https://jsdelivr.net"></script>
+
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
     .font-outfit { font-family: 'Outfit', sans-serif; }
@@ -17,6 +23,8 @@
   </style>
 </head>
 <body class="min-h-screen bg-slate-50 text-slate-900 flex flex-col justify-between selection:bg-sky-100">
+
+  <!-- ================= TOP NAVIGATION ================= -->
   <header class="border-b border-slate-200/80 bg-white/90 backdrop-blur-md sticky top-0 z-40 px-4 py-3">
     <div class="max-w-5xl mx-auto flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -30,54 +38,90 @@
         </div>
       </div>
       <div class="flex items-center gap-2">
-        <button id="btnPrizeTable" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700 bg-white border border-slate-200/80 hover:bg-slate-100 transition-all"><span>Prizes</span></button>
-        <button id="btnHistory" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700 bg-white border border-slate-200/80 hover:bg-slate-100 transition-all"><span>History</span></button>
+        <button id="btnPrizeTable" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700 bg-white border border-slate-200/80 hover:bg-slate-100 transition-all cursor-pointer">
+          <span>Prizes</span>
+        </button>
+        <button id="btnHistory" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700 bg-white border border-slate-200/80 hover:bg-slate-100 transition-all cursor-pointer">
+          <span>History</span>
+        </button>
       </div>
     </div>
   </header>
 
-  <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-6 sm:py-8 flex flex-col items-center">
+  <!-- ================= MAIN REWARD VIEW ================= -->
+  <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-6 sm:py-8 flex flex-col items-center justify-center">
     <div class="text-center max-w-lg mb-6">
-      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 border border-sky-200/80 text-sky-800 text-xs font-bold mb-2"><span>Cotton Nest Customer Reward</span></div>
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Spin to Win Your Store Voucher</h2>
-      <p class="text-xs sm:text-sm text-slate-600 mt-1">Every spin is a guaranteed winner of ₹100 to ₹150 OFF!</p>
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 border border-sky-200/80 text-sky-800 text-xs font-bold mb-2">
+        <span>Cotton Nest Customer Reward</span>
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Spin to Win Your Store Voucher</h2>
+      <p class="text-xs sm:text-sm text-slate-600 mt-1">Every spin is a guaranteed winner of ₹100 to ₹150 OFF! Valid on all items.</p>
     </div>
 
-    <div class="relative flex flex-col items-center justify-center w-full max-w-[360px] aspect-square my-4">
-      <div class="absolute -top-3 z-30 pointer-events-none" id="wheelPointer">
-        <svg width="28" height="36" viewBox="0 0 28 36"><polygon points="14,36 0,6 28,6" fill="#ef4444" stroke="#ffffff" stroke-width="2.5"/><circle cx="14" cy="9" r="2.5" fill="#b91c1c" /></svg>
+    <!-- ================= WHEEL CAROUSEL GRAPHIC ================= -->
+    <div class="relative flex flex-col items-center justify-center w-full max-w-[340px] sm:max-w-[400px] aspect-square my-4 bg-white p-4 rounded-3xl shadow-md border border-slate-100">
+      
+      <!-- Top Red Arrow Pin Indicator -->
+      <div class="absolute -top-2 z-30 pointer-events-none left-1/2 -translate-x-1/2 drop-shadow-md">
+        <svg width="28" height="32" viewBox="0 0 28 32">
+          <polygon points="14,32 0,4 28,4" fill="#ef4444" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="14" cy="8" r="3" fill="#ffffff" />
+        </svg>
       </div>
-      <canvas id="wheelCanvas" width="800" height="800" class="w-full h-full drop-shadow-xl transition-transform duration-[4000ms] ease-out"></canvas>
+
+      <!-- Canvas Render Space -->
+      <div class="w-full h-full overflow-hidden rounded-full border-4 border-slate-100 shadow-inner">
+        <canvas id="wheelCanvas" width="800" height="800" class="w-full h-full transition-transform duration-[4000ms] ease-out origin-center"></canvas>
+      </div>
+
+      <!-- ABSOLUTE CENTER BUTTON -->
       <div class="absolute inset-0 m-auto w-24 h-24 z-20 flex items-center justify-center">
-        <button id="btnSpin" class="w-full h-full rounded-full bg-gradient-to-tr from-sky-700 to-sky-400 p-1 shadow-2xl hover:scale-105 active:scale-95 transition-all">
-          <div class="w-full h-full rounded-full bg-white flex flex-col items-center justify-center border border-sky-100 shadow-inner">
-            <span class="text-sm font-black text-sky-900">SPIN</span>
+        <button id="btnSpin" class="w-full h-full rounded-full bg-gradient-to-tr from-sky-600 to-sky-400 p-1 shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer">
+          <div class="w-full h-full rounded-full bg-white flex flex-col items-center justify-center border border-sky-50 shadow-inner">
+            <span class="text-sm font-black text-sky-900 tracking-wider">SPIN</span>
+            <span class="text-[8px] font-bold text-sky-500 tracking-widest uppercase">100% Win</span>
           </div>
         </button>
       </div>
     </div>
 
-    <div id="voucherSection" class="w-full max-w-xl mt-6 hidden">
-      <div class="bg-gradient-to-br from-white to-sky-50/30 rounded-2xl p-6 border border-sky-100 shadow-xl">
-        <div class="border-2 border-dashed border-sky-200/80 rounded-xl p-5 bg-white text-center">
-          <h3 class="text-3xl font-black text-sky-900" id="voucherAmount">₹150 OFF</h3>
-          <div class="mt-4 flex flex-col sm:flex-row items-center gap-3">
-            <div class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 font-mono text-sm font-bold tracking-wider text-slate-700" id="promoCode">LUCKY150-XXXX</div>
-            <button id="btnCopy" class="w-full sm:w-auto bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs px-4 py-2.5 rounded-lg shrink-0"><span>Copy Code</span></button>
+    <!-- ================= VOUCHER REVEAL BOARD ================= -->
+    <div id="voucherSection" class="w-full max-w-md mt-6 hidden opacity-0 transition-all duration-500">
+      <div class="bg-gradient-to-br from-white to-sky-50/20 rounded-2xl p-6 border border-sky-100 shadow-xl text-center">
+        <span class="px-2.5 py-0.5 rounded-md bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200 inline-block mb-3">✓ Coupon Code Unlocked</span>
+        <div class="border-2 border-dashed border-sky-200 rounded-xl p-5 bg-white">
+          <p class="text-[10px] font-bold tracking-widest uppercase text-slate-400 font-outfit">Your Exclusive Code</p>
+          <h3 class="text-3xl font-black text-sky-900 my-1 font-outfit" id="voucherAmount">₹150 OFF</h3>
+          <div class="mt-4 flex flex-col sm:flex-row items-center gap-2">
+            <div class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 font-mono text-sm font-bold text-slate-700 tracking-wide select-all" id="promoCode">LUCKY150-XXXX</div>
+            <button id="btnCopy" class="w-full sm:w-auto bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs px-4 py-2.5 rounded-lg transition-colors cursor-pointer shrink-0">Copy</button>
           </div>
         </div>
-        <div class="text-center mt-3"><button id="btnReset" class="text-[11px] font-semibold text-sky-600 hover:underline">Reset for testing</button></div>
+        <button id="btnReset" class="text-[11px] font-semibold text-sky-600 hover:underline mt-4 block mx-auto cursor-pointer">Reset & Spin Again (Demo Mode)</button>
       </div>
     </div>
   </main>
 
-  <div id="modalPrizes" class="fixed inset-0 z-50 bg-slate-900/40 flex items-center justify-center p-4 hidden">
-    <div class="bg-white rounded-2xl w-full max-w-md p-5"><h3 class="font-bold mb-3">Prize Pools</h3><div id="prizeList" class="space-y-2 text-xs"></div><button class="closeModal mt-4 px-4 py-1.5 bg-slate-800 text-white text-xs rounded-lg">Close</button></div>
+  <!-- ================= POPUP MODALS ================= -->
+  <div id="modalPrizes" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl w-full max-w-sm p-5 shadow-2xl">
+      <h3 class="font-bold text-slate-800 border-b pb-2 mb-3">Available Prize Pools</h3>
+      <div id="prizeList" class="space-y-1.5 text-xs max-h-60 overflow-y-auto"></div>
+      <button class="closeModal mt-4 w-full py-2 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-xl cursor-pointer">Close</button>
+    </div>
   </div>
 
-  <div id="modalHistory" class="fixed inset-0 z-50 bg-slate-900/40 flex items-center justify-center p-4 hidden">
-    <div class="bg-white rounded-2xl w-full max-w-md p-5"><h3 class="font-bold mb-3">Claim History</h3><div id="historyContent" class="text-xs"></div><button class="closeModal mt-4 px-4 py-1.5 bg-slate-800 text-white text-xs rounded-lg">Close</button></div>
+  <div id="modalHistory" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl w-full max-w-sm p-5 shadow-2xl">
+      <h3 class="font-bold text-slate-800 border-b pb-2 mb-3">Your Claim History</h3>
+      <div id="historyContent" class="text-xs text-slate-600"></div>
+      <button class="closeModal mt-4 w-full py-2 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-xl cursor-pointer">Close</button>
+    </div>
   </div>
+
+  <footer class="border-t border-slate-200 py-4 px-4 text-center text-[11px] text-slate-400 font-medium">
+    &copy; 2026 Cotton Nest • Premium Bedding & Apparel
+  </footer>
 
   <script src="script.js"></script>
 </body>
