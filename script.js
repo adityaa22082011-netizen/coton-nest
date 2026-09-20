@@ -62,16 +62,25 @@ function playFanfare() {
   } catch (e) {}
 }
 
-// --- Canvas Wheel Rendering ---
+// --- Canvas Wheel Rendering (Navratri Red & Gold Festive Edition) ---
 const canvas = document.getElementById('wheelCanvas');
 const ctx = canvas.getContext('2d');
 const center = 400;
 const radius = 370;
 
-const COLORS = [
-  '#0284c7', '#0369a1', '#0ea5e9', '#38bdf8',
-  '#2563eb', '#1d4ed8', '#3b82f6', '#60a5fa',
-  '#0891b2', '#06b6d4', '#0284c7'
+// Alternating Navratri Royal Crimson & Festive Imperial Gold (Deepened Tones)
+const SLICE_CONFIG = [
+  { bg: '#6e071a', text: '#fef08a', isRed: true },  // ₹100 - Deep Crimson
+  { bg: '#b45309', text: '#fffbeb', isRed: false }, // ₹105 - Deep Antique Gold
+  { bg: '#580512', text: '#fef08a', isRed: true },  // ₹110 - Deep Ruby
+  { bg: '#c27803', text: '#fffbeb', isRed: false }, // ₹115 - Deep Amber Gold
+  { bg: '#78091a', text: '#fef08a', isRed: true },  // ₹120 - Deep Scarlet
+  { bg: '#a15004', text: '#fffbeb', isRed: false }, // ₹125 - Antique Gold
+  { bg: '#5c0615', text: '#fef08a', isRed: true },  // ₹130 - Regal Crimson
+  { bg: '#b85d06', text: '#fffbeb', isRed: false }, // ₹135 - Sunlit Brass
+  { bg: '#700819', text: '#fef08a', isRed: true },  // ₹140 - Velvet Red
+  { bg: '#9a4403', text: '#fffbeb', isRed: false }, // ₹145 - Marigold
+  { bg: '#c47306', text: '#fffbeb', isRed: false }, // ₹150 - Ultimate Navratri Gold
 ];
 
 function drawWheel(angle) {
@@ -82,56 +91,89 @@ function drawWheel(angle) {
   ctx.translate(center, center);
   ctx.rotate(angle);
 
-  // Draw Segments
+  // 1. Draw Alternating Crimson & Gold Segments
   for (let i = 0; i < SEGMENTS_COUNT; i++) {
     const segAngle = i * arc;
+    const slice = SLICE_CONFIG[i % SLICE_CONFIG.length];
+
     ctx.beginPath();
-    ctx.fillStyle = COLORS[i % COLORS.length];
+    ctx.fillStyle = slice.bg;
     ctx.moveTo(0, 0);
-    ctx.arc(0, 0, radius, segAngle, segAngle + arc);
+    ctx.arc(0, 0, radius - 20, segAngle, segAngle + arc);
     ctx.lineTo(0, 0);
     ctx.fill();
 
-    // Divider line
+    // Radiant Gold Divider line
     ctx.lineWidth = 2.5;
-    ctx.strokeStyle = '#ffffff';
+    ctx.strokeStyle = '#fbbf24';
     ctx.stroke();
 
-    // Amount text
+    // High Contrast Text rotated along slice radius
     ctx.save();
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 36px Outfit, sans-serif';
-    ctx.shadowColor = 'rgba(0,0,0,0.3)';
-    ctx.shadowBlur = 4;
-    ctx.shadowOffsetY = 2;
+    ctx.fillStyle = slice.text;
+    ctx.font = 'bold 34px Outfit, sans-serif';
+    ctx.shadowColor = slice.isRed ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.4)';
+    ctx.shadowBlur = 3;
+    ctx.shadowOffsetY = 1;
 
     ctx.translate(
-      Math.cos(segAngle + arc / 2) * (radius * 0.72),
-      Math.sin(segAngle + arc / 2) * (radius * 0.72)
+      Math.cos(segAngle + arc / 2) * (radius * 0.65),
+      Math.sin(segAngle + arc / 2) * (radius * 0.65)
     );
     ctx.rotate(segAngle + arc / 2 + Math.PI / 2);
     const text = `₹${DISCOUNTS[i]}`;
-    ctx.fillText(text, -ctx.measureText(text).width / 2, 10);
+    ctx.fillText(text, -ctx.measureText(text).width / 2, 8);
+
+    // "OFF" Sub-label
+    ctx.font = '800 13px sans-serif';
+    ctx.letterSpacing = '1px';
+    const subText = 'OFF';
+    ctx.fillText(subText, -ctx.measureText(subText).width / 2, 26);
+
     ctx.restore();
   }
 
-  // Outer gold rim
+  // 2. Deep Royal Crimson Bezel (matching user reference image)
   ctx.beginPath();
-  ctx.arc(0, 0, radius, 0, Math.PI * 2);
-  ctx.lineWidth = 14;
-  ctx.strokeStyle = '#f59e0b';
+  ctx.arc(0, 0, radius - 10, 0, Math.PI * 2);
+  ctx.lineWidth = 24;
+  ctx.strokeStyle = '#540713';
   ctx.stroke();
 
-  // Perimeter pegs
-  for (let p = 0; p < SEGMENTS_COUNT * 2; p++) {
-    const pegAngle = (p * Math.PI) / SEGMENTS_COUNT;
-    const px = Math.cos(pegAngle) * (radius - 1);
-    const py = Math.sin(pegAngle) * (radius - 1);
+  // Outer Gold Stroke
+  ctx.beginPath();
+  ctx.arc(0, 0, radius + 2, 0, Math.PI * 2);
+  ctx.lineWidth = 3.5;
+  ctx.strokeStyle = '#92400e';
+  ctx.stroke();
+
+  // Inner Gold Stroke
+  ctx.beginPath();
+  ctx.arc(0, 0, radius - 22, 0, Math.PI * 2);
+  ctx.lineWidth = 2.5;
+  ctx.strokeStyle = '#b45309';
+  ctx.stroke();
+
+  // 3. Auspicious 3D Golden Rivets / Brass Studs (uniform perimeter)
+  const totalRivets = 22;
+  for (let p = 0; p < totalRivets; p++) {
+    const pegAngle = (p * Math.PI * 2) / totalRivets;
+    const px = Math.cos(pegAngle) * (radius - 10);
+    const py = Math.sin(pegAngle) * (radius - 10);
+
+    // 3D Spherical metallic gold rivet gradient
+    const grad = ctx.createRadialGradient(px - 1.5, py - 1.5, 1, px, py, 6);
+    grad.addColorStop(0, '#ffffff');
+    grad.addColorStop(0.3, '#fef08a');
+    grad.addColorStop(0.7, '#eab308');
+    grad.addColorStop(1, '#78350f');
+
     ctx.beginPath();
-    ctx.arc(px, py, 4.5, 0, Math.PI * 2);
-    ctx.fillStyle = '#ffffff';
-    ctx.shadowColor = 'rgba(0,0,0,0.4)';
+    ctx.arc(px, py, 5.5, 0, Math.PI * 2);
+    ctx.fillStyle = grad;
+    ctx.shadowColor = 'rgba(0,0,0,0.6)';
     ctx.shadowBlur = 3;
+    ctx.shadowOffsetY = 1.5;
     ctx.fill();
   }
 
@@ -221,6 +263,17 @@ function showVoucher(coupon) {
   document.getElementById('bannerAmountText').textContent = coupon.amount;
   document.getElementById('bannerCodeText').textContent = coupon.code;
   document.getElementById('voucherSection').classList.remove('hidden');
+
+  // Automatically pop out winning ticket modal (no scrolling needed on mobile/phones)
+  const modalPop = document.getElementById('modalWinningTicket');
+  if (modalPop) {
+    const modalAmt = document.getElementById('modalBannerAmountText');
+    const modalCode = document.getElementById('modalBannerCodeText');
+    if (modalAmt) modalAmt.textContent = coupon.amount;
+    if (modalCode) modalCode.textContent = coupon.code;
+    modalPop.classList.remove('hidden');
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function lockSpinButton() {
@@ -267,15 +320,38 @@ window.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => { btnText.textContent = 'Copy Promo Code'; }, 2200);
   });
 
-  document.getElementById('btnResetSpin').addEventListener('click', () => {
-    localStorage.removeItem(STORAGE_KEY);
-    activeCoupon = null;
-    document.getElementById('voucherSection').classList.add('hidden');
-    const btn = document.getElementById('btnSpin');
-    btn.disabled = false;
-    document.getElementById('spinButtonText').textContent = 'SPIN';
-    document.getElementById('spinButtonSub').textContent = '100% Win';
-  });
+  // Pop out ticket modal controls
+  const modalWinning = document.getElementById('modalWinningTicket');
+  const btnPopout = document.getElementById('btnPopoutTicket');
+  if (btnPopout && modalWinning) {
+    btnPopout.addEventListener('click', () => {
+      if (activeCoupon) {
+        document.getElementById('modalBannerAmountText').textContent = activeCoupon.amount;
+        document.getElementById('modalBannerCodeText').textContent = activeCoupon.code;
+        modalWinning.classList.remove('hidden');
+      }
+    });
+  }
+
+  const btnCloseWinning = document.getElementById('btnCloseWinningTicket');
+  if (btnCloseWinning && modalWinning) {
+    btnCloseWinning.addEventListener('click', () => modalWinning.classList.add('hidden'));
+  }
+  const btnClaimWinning = document.getElementById('btnClaimWinningTicket');
+  if (btnClaimWinning && modalWinning) {
+    btnClaimWinning.addEventListener('click', () => {
+      if (activeCoupon) {
+        navigator.clipboard.writeText(activeCoupon.code);
+        btnClaimWinning.textContent = 'Copied to Clipboard!';
+        setTimeout(() => {
+          btnClaimWinning.textContent = 'Copy Code & Shop Now';
+          modalWinning.classList.add('hidden');
+        }, 1200);
+      } else {
+        modalWinning.classList.add('hidden');
+      }
+    });
+  }
 
   // Modal logic
   const modalPrize = document.getElementById('modalPrizeTable');
